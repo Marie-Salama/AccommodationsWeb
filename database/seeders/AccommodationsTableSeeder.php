@@ -29,7 +29,7 @@ class AccommodationsTableSeeder extends Seeder
 
             $sharedOrIndividual = ['shared', 'individual'][random_int(0, 1)];
             $numTenants = ($sharedOrIndividual === 'individual') ? 1 : random_int(1, 4);
-            $numTenantsAvailable = ($sharedOrIndividual === 'individual') ? 1 : random_int(0, $numTenants);
+            $numTenantsAvailable = ($sharedOrIndividual === 'individual') ? random_int(0, 1) : random_int(0, $numTenants);
 
             // $ownerId = $ownerIds[array_rand($ownerIds)];
             DB::table('accommodations')->insert([
@@ -38,7 +38,7 @@ class AccommodationsTableSeeder extends Seeder
                 'location_link' => 'https://example.com/location/' . str_replace(' ', '-', $region),
                 'governorate' => $governorate,
                 'region' => $region,
-                'price' => random_int(50, 200),
+                'price' => random_int(1000, 7000),
                 'facilities' => 'Facilities: WiFi, Kitchenette, Bathroom',
                 'shared_or_individual' => $sharedOrIndividual,
                 // 'owner_id' => random_int(1, 20), // Assuming you have owners with IDs 1 to 10

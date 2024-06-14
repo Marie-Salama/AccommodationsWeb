@@ -95,19 +95,34 @@ class UsersTableSeeder extends Seeder
 
     public function run(Faker $faker)
     {
-        $names = ['Amr Khalid', 'Mona Essam', 'Ahmed Saleh', 'Fatima Hamed', 'Karim Adel',
-                  'Dalia Fouad', 'Mostafa Nabil', 'Aya Tarek', 'Mohamed Samir', 'Heba Zaher',
-                  'Omar Wael', 'Marwa Khaled', 'Mahmoud Elias', 'Rania Sameh', 'Youssef Maher',
-                  'Nada Hesham', 'Sami Tamer', 'Salma Mamdouh', 'Alaa Gamal', 'Ahmad Emad'];
+        $names = [
+            'Amr Khalid', 'Mona Essam', 'Ahmed Saleh', 'Fatima Hamed', 'Karim Adel',
+            'Dalia Fouad', 'Mostafa Nabil', 'Aya Tarek', 'Mohamed Samir', 'Heba Zaher',
+            'Omar Wael', 'Marwa Khaled', 'Mahmoud Elias', 'Rania Sameh', 'Youssef Maher',
+            'Nada Hesham', 'Sami Tamer', 'Salma Mamdouh', 'Alaa Gamal', 'Ahmad Emad'
+        ];
 
-        $cities = ['Cairo', 'Alexandria', 'Giza', 'Shubra El-Kheima', 'Port Said', 'Suez', 'Luxor', 'Aswan', 'Mansoura', 'Tanta'];
-        $whereToGo = ['Alexandria','Cairo','Aswan'];
-        $x = [1, 2, 3, 4, 5, 6, 7];
+        // $cities = ['Cairo', 'Alexandria', 'Giza', 'Shubra El-Kheima', 'Port Said', 'Suez', 'Luxor', 'Aswan', 'Mansoura', 'Tanta'];
+
+        $cities = [
+            'Cairo', 'Giza', 'Alexandria', 'Shubra al Khaymah', 'Halwan', 'Al Mahallah al Kubra',
+            'Tanta', 'Asyut', 'Al Fayyum', 'Az Zaqaziq', 'Al Ajami', 'Kafr ad Dawwar',
+            'Damanhur', 'Al Minya', 'Mallawi', 'Damietta', 'Qina', 'Bani Suwayf',
+            'Shibin al Kawm', 'Banha', 'Kafr ash Shaykh', 'Disuq', 'Mit Ghamr',
+            'Munuf', 'Faqus', 'Qalyub', 'Jirja', 'Akhmim', 'Al Badrashayn',
+            'Al Khankah', 'Izbat al Burj', 'Kirdasah', 'Abnub', 'Al Minshah',
+            'Al Qurayn', 'Al Balyana', 'Al Ayyat', 'Al Badari', 'Kafr al Kurdi',
+            'Abu Qir', 'Al Karnak', 'Mit Nama', 'Bani Murr', 'Al Madamud',
+            'Birqash', 'Kafr Tahlah'
+        ];
+
+        $whereToGo = ['Alexandria', 'Cairo', 'Aswan'];
+        // $x = [1, 2, 3, 4, 5, 6, 7];
 
         foreach ($names as $name) {
             DB::table('users')->insert([
                 'name' => $name,
-                'email' => strtolower(str_replace(' ', '', $name)) .$faker->numberBetween(1, 10). '@gmail.com',
+                'email' => strtolower(str_replace(' ', '', $name)) . $faker->numberBetween(1, 10) . 'a@gmail.com',
                 'status' => $faker->randomElement(['worker', 'student']),
                 'gender' => $faker->randomElement(['male', 'female']),
                 'age' => $faker->numberBetween(18, 45),
@@ -142,5 +157,4 @@ class UsersTableSeeder extends Seeder
         //     ]);
         // }
     }
-
 }

@@ -22,7 +22,7 @@ class RecommendationController extends Controller
         if (!$user || !$user->city || !$user->where_to_go) {
             return response()->json(['error' => 'User origin and destination not found.'], 400);
         }
-
+//here
         // $userOrigin = "Luxor";
         // $userDestination = "Aswan";
         $userOrigin = $user->city;
@@ -47,13 +47,16 @@ class RecommendationController extends Controller
         //     whereIn('region', $recommendedAreas)
         //     ->orderByRaw("FIELD(region, '" . implode("','", $recommendedAreas) . "')") //sort results based on elem from array
         //     ->get();
-        $accommodations = Accommodation::whereIn('region', $recommendedAreas)
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>        correct one          <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+        /*$accommodations = Accommodation::whereIn('region', $recommendedAreas)
         ->orderByRaw("FIELD(region, '" . implode("','", $recommendedAreas) . "')")
             ->get()
             ->filter(function($accommodation) {
                 return $accommodation->isAvailable();
-            });
-
+            });*/
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         // return view('recommendation_system_output', ['recommendations' => $recommendedAreas], ['accommodations' => $accommodations]);
 
     //>>>>>>>>>>>>>>>>>>>>>>>>correct one<<<<<<<<<<<<<<<<<<<<<
@@ -62,7 +65,7 @@ class RecommendationController extends Controller
         //     'accommodations' => $accommodations,
         // ], 200);
     //>>>>>>>>>>>>>>>>>>>>>       <<<<<<<<<<<<<<<<<<<<<<<<<<<
-        $accommodationsData = $accommodations->map(function ($accommodation) {
+        /*$accommodationsData = $accommodations->map(function ($accommodation) {
             return [
                 'governorate' => $accommodation->governorate,
                 'region' => $accommodation->region,
@@ -70,7 +73,25 @@ class RecommendationController extends Controller
                 'images' => $accommodation->main_image,
             ];
         });
-        return response()->json(['accommodations' => $accommodationsData]);
+        return response()->json(['accommodations' => $accommodationsData]);*/
+        $accommodations = Accommodation::whereIn('region', $recommendedAreas)
+            ->orderByRaw("FIELD(region, '" . implode("','", $recommendedAreas) . "')")
+            ->get()
+            ->filter(function($accommodation) {
+                return $accommodation->isAvailable();
+            })
+            ->map(function ($accommodation) {
+                return [
+                    'governorate' => $accommodation->governorate,
+                    'region' => $accommodation->region,
+                    'price' => $accommodation->price,
+                    'images' => $accommodation->main_image,
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        return response()->json(['accommodations' => $accommodations]);
 
     }
 

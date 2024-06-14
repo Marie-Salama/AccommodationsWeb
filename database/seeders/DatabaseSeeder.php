@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(OwnersTableSeeder::class);
         $this->call(AdminsTableSeeder::class);
-        $this->call(AccommodationsTableSeeder::class);  
+        $this->call(AccommodationsTableSeeder::class);
+        $this->call(RentalsTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

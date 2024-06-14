@@ -13,6 +13,7 @@ class AdminsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //nearly 18 admins
         DB::table('admins')->insert([
             ['name' => 'Amr Hassan', 'email' => 'amrhassan@example.com', 'password' => Hash::make('123456789'), 'phone' => '0123456789', 'photo' => 'https://img.freepik.com/free-photo/positive-brunet-man-with-crossed-arms_1187-5797.jpg?size=626&ext=jpg&ga=GA1.1.1128979091.1706343120&semt=sph', 'email_verified_at' => null, 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Sara Ali', 'email' => 'saraali@example.com', 'password' => Hash::make('123456789'), 'phone' => '0123456790', 'photo' => 'https://img.freepik.com/free-photo/positive-woman-with-crossed-arms_1187-5707.jpg?size=626&ext=jpg', 'email_verified_at' => null, 'created_at' => now(), 'updated_at' => now()],
