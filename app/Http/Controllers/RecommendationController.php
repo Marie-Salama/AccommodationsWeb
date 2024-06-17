@@ -85,7 +85,7 @@ class RecommendationController extends Controller
                     'governorate' => $accommodation->governorate,
                     'region' => $accommodation->region,
                     'price' => $accommodation->price,
-                    'images' => $accommodation->main_image,
+                    'main_image' => $accommodation->main_image,
                 ];
             })
             ->values()
