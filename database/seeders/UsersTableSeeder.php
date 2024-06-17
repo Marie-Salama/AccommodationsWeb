@@ -103,7 +103,7 @@ class UsersTableSeeder extends Seeder
         ];
 
         // $cities = ['Cairo', 'Alexandria', 'Giza', 'Shubra El-Kheima', 'Port Said', 'Suez', 'Luxor', 'Aswan', 'Mansoura', 'Tanta'];
-
+//all origins
         $cities = [
             'Cairo', 'Giza', 'Alexandria', 'Shubra al Khaymah', 'Halwan', 'Al Mahallah al Kubra',
             'Tanta', 'Asyut', 'Al Fayyum', 'Az Zaqaziq', 'Al Ajami', 'Kafr ad Dawwar',

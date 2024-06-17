@@ -39,7 +39,7 @@ class AccommodationController extends Controller
     //     Log::error("'You must be logged in to upload accommodation.");
     //     return response()->json(['error' => 'You must be logged in to upload accommodations.'], 403);
     // }
-    
+
 
 
     // if (!Auth::guard('owner')->check()) {
@@ -69,8 +69,8 @@ class AccommodationController extends Controller
     //     // Return a JSON response if not authenticated
     //     return response()->json(['error' => 'You must be logged in to upload accommodation.'], 401);
     // }
-    
-    
+
+
     return view('auth.uploadaccommodation');
 }
 // public function store(Request $request)
@@ -144,10 +144,10 @@ $uploadedImages = [];
         $accommodationData['images'] = $uploadedImages;
         $accommodationData['owner_id'] = Auth::user()->id;
         $accommodation = Accommodation::create($accommodationData);
-        $noOfTenantsAvailable = $accommodation->shared_or_individual === 'shared' ? $accommodation->no_of_tenants : 1;  
+        $noOfTenantsAvailable = $accommodation->shared_or_individual === 'shared' ? $accommodation->no_of_tenants : 1;
         $accommodation->no_of_tenants_available = $noOfTenantsAvailable;
         $accommodation->save();
-     return response()->json([
+        return response()->json([
         'success' => true,
         'message' => 'Accommodation uploaded successfully',
     ]);
@@ -197,7 +197,7 @@ $uploadedImages = [];
 //     $accommodation->owner_id = Auth::id();
 //     $accommodation->no_of_tenants = $request->no_of_tenants;
 //     $accommodation->no_of_tenants_available = $request->shared_or_individual === 'shared' ? $request->no_of_tenants : 1;
-    
+
 //     $accommodation->save();
 
 //     return response()->json([
@@ -277,7 +277,7 @@ public function showAll()
 {
     // Retrieve all accommodations with only the id and main_image columns
     $accommodations = Accommodation::select('id', 'main_image')->get();
-    
+
     return view('auth.all-accommodations', compact('accommodations'));
 }
 
@@ -396,7 +396,7 @@ public function showSome()
 //             $accommodationImages[] = asset('storage/images/' . basename($image));
 //         }
 //         $images[$accommodation->id] = $accommodationImages;
-        
+
 //     }
 
 
@@ -478,7 +478,7 @@ public function edit($id)
 //           // Ensure file uploads are validated
 //         'main_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
 //     ]);
-    
+
 
 //     // Update the accommodation with the request data
 //     $accommodation->update($request->all());
