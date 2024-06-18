@@ -54,7 +54,7 @@ class rentalController extends Controller
             'accommodations_id' => $accommodation_id,
             'receipt' => $image,
             'confirmed'=>0,
-        ]);;
+        ]);
         return response()->json(['rental' => $rental], 201);
 
     }
