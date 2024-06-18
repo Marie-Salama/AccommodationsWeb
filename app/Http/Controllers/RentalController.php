@@ -19,7 +19,7 @@ class rentalController extends Controller
         if (!$accommodation) {
             return redirect()->route('error.page', ['message' => 'Accommodation not found']);
         }
-    
+
         return view('auth.rentalForm', compact('accommodation', 'accommodation_id'));
     }
 
@@ -45,7 +45,8 @@ class rentalController extends Controller
         // $accommodation_id = $data['accommodation_id'];
         //$user_id = Auth::id(); // Get the ID of the currently authenticated user
         //$accommodation_id=Accommodation::where('id',$accommodation_id)->first()->id;
-        Rental::create([
+
+        $rental = Rental::create([
             'start_date'=>$start_date,
             'end_date' => $end_date,
             'reference_number' => $refrence_number,
@@ -53,8 +54,8 @@ class rentalController extends Controller
             'accommodations_id' => $accommodation_id,
             'receipt' => $image,
             'confirmed'=>0,
-        ]);
-        return to_route(route:'accommodation.showAll');
+        ]);;
+        return response()->json(['rental' => $rental], 201);
 
     }
 
@@ -104,24 +105,24 @@ class rentalController extends Controller
     // {
     //     // Retrieve the authenticated user's ID
     //     $user_id = Auth::id();
-    
+
     //     // Retrieve the request data
     //     $reference_number = $request->input('reference_number');
     //     $end_date = $request->input('end_date');
     //     $start_date = now()->addDays(5)->format('Y-m-d');
     //     $accommodation_id = $request->input('accommodation_id');
-        
+
     //     // Retrieve the uploaded image file
     //     $image = $request->file('img');
-    
+
     //     // Check if an image was uploaded
     //     if ($image) {
     //         // Generate a unique name for the image
     //         $imageName = time() . '_' . $image->getClientOriginalName();
-    
+
     //         // Store the image in the storage directory
     //         $imagePath = $image->storeAs('public/receipts', $imageName);
-    
+
     //         // Create the rental record with the image path
     //         Rental::create([
     //             'start_date' => $start_date,
@@ -132,7 +133,7 @@ class rentalController extends Controller
     //             'receipt' => $imagePath,
     //             'confirmed' => 0,
     //         ]);
-    
+
     //         // Return a response indicating success
     //         return response()->json(['message' => 'Rental created successfully'], 201);
     //     } else {
@@ -322,7 +323,7 @@ public function confirm(Rental $rental)
         // Update the accommodation with the new number of tenants available
         $accommodation->no_of_tenants_available = $noOfTenantsAvailable;
         $accommodation->save();
-        
+
     return response()->json([
         'success' => true,
         'message' => 'Rental confirmed successfully.',
